@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from sympy import *
+from prettytable import PrettyTable
 import math
 
 
@@ -11,24 +12,27 @@ class COLORS:
     FAIL = '\033[91m'
 
 
-def draw_graph(array_X, array_Y):
+def draw_graph(array_X, array_Y, given_X, value, graph_type):
     fig, ax = plt.subplots()
     ax.spines['left'].set_position(('data', 0))
-    ax.spines['bottom'].set_position(('data', 0))
+    ax.spines['bottom'].set_position(('data', array_Y[0]))
     plt.grid(b=True, which='major', linestyle='-')
     plt.minorticks_on()
     plt.grid(b=True, which='minor', linestyle='-', alpha=0.3)
     plt.margins(x=0, y=0)
     n = len(array_X)
 
-    x_values = np.linspace(array_X[0], array_X[n - 1], 30)
-    y_values = np.zeros(30)
-    for i in range(len(x_values)):
-        y_values[i] = newton_div_difference(array_X, array_Y, x_values[i], 0, len(array_Y))
-    plt.plot(x_values, y_values, 'g')
+    arrow_properties = dict(
+        facecolor="black", width=0.5,
+        headwidth=10, shrink=1)
+
+    plt.plot(array_X, array_Y, 'g')
+    plt.xlabel('t')
+    plt.ylabel(graph_type)
     plt.xlim((array_X[0], array_X[n - 1]))
-    plt.ylim((0, array_Y[n - 1] + 450))
-    plt.title('f(x)')
+    plt.ylim((array_Y[0], array_Y[n - 1]))
+    plt.annotate(f"({given_X}, {value})", (given_X, value), color='b', arrowprops=arrow_properties)
+    plt.title(f"{graph_type} vs time")
     plt.show()
 
 
@@ -105,27 +109,30 @@ def answer_function(array_X, array_Y, given_X, order, ans_type):
 
     old_solve = new_solve = 0
     select_id = initialStart(array_X, given_X)
-    error = np.zeros(3)
+
+    data_table = PrettyTable()
+    data_table.field_names = ["order of polynomial", f"{ans_type}", "error%"]
 
     for i in range(1, order + 1):
         [start_id, end_id] = identifyStartEnd(array_X, given_X, i, select_id)
         new_solve = newton_div_difference(array_X, array_Y, given_X, start_id, end_id)
-        if i != 1:
+        if i == 1:
+            data_table.add_row([i, new_solve, "--"])
+        else:
             new_err = math.fabs((new_solve - old_solve) / new_solve) * 100
-            error[i - 2] = new_err
+            data_table.add_row([i, new_solve, new_err])
 
         old_solve = new_solve
 
     print()
     print(f"{COLORS.HEADER}The estimated {ans_type} at t = {given_X} is: {new_solve}")
-    for i in range(len(error)):
-        print(f"{COLORS.RESET}The absolute approximate relative error for {i + 2} order is: {error[i]}")
+    print(f"{COLORS.RESET}{data_table}")
 
     return new_solve
 
 
-def build_function(array_X, array_Y, unknown_X, given_X):
-    [start_id, end_id] = identifyStartEnd(x_arr, given_X, degree, initialStart(x_arr, t))
+def build_function(array_X, array_Y, unknown_X, given_X, order):
+    [start_id, end_id] = identifyStartEnd(array_X, given_X, order, initialStart(array_X, given_X))
     new_solve = newton_div_difference(array_X, array_Y, unknown_X, start_id, end_id)
 
     return new_solve
@@ -154,14 +161,14 @@ if __name__ == "__main__":
     degree = 4
 
     mass = answer_function(x_arr, y_arr_mass, t, degree, 'mass')
-    vel = answer_function(x_arr, y_arr_velocity, t, degree, 'velocity')
+    velocity = answer_function(x_arr, y_arr_velocity, t, degree, 'velocity')
 
-    draw_graph(x_arr, y_arr_mass)
-    draw_graph(x_arr, y_arr_velocity)
+    draw_graph(x_arr, y_arr_mass, t, mass, 'mass')
+    draw_graph(x_arr, y_arr_velocity, t, velocity, 'velocity')
 
     x = Symbol('x')
-    func_mass = build_function(x_arr, y_arr_mass, x, t)
-    func_velocity = build_function(x_arr, y_arr_velocity, x, t)
+    func_mass = build_function(x_arr, y_arr_mass, x, t, degree)
+    func_velocity = build_function(x_arr, y_arr_velocity, x, t, degree)
 
     momentum_func = func_mass * func_velocity
     force = momentum_func.diff(x)
