@@ -188,4 +188,4 @@ if __name__ == "__main__":
     total_work = integral_ab + integral_bc
 
     print()
-    print(f"{COLORS.HEADER}The estimated total work between v={v1} and v={v2} is: {total_work} J")
+    print(f"{COLORS.HEADER}The estimated total work between v=25 and v=35 cubic m is: {total_work} J")
