@@ -3,7 +3,7 @@
  
  Here are my implemented codes:
  
-    1. Non Linear Eqns Solution
+    1. <b> Non Linear Eqns Solution </b>
        Bisection Method for solving non-linear eqn  (Offline 1, Online 1)
        Newton-Raphson Method for solving non-linear eqn  
        
