@@ -13,3 +13,7 @@
    #### 3. Interpolation 
            Newton's Divided Difference Method for Interpolation  (Online 2)
            Lagrange's Method For Interpolation  (Online 2)
+           
+   #### 4. Integration
+           Trapezoid Rule for integration  (offline 3)
+           Simpson's 1/3 Rule for integration  (offline 3)
