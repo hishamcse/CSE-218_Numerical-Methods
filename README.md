@@ -17,3 +17,9 @@
    #### 4. Integration
            Trapezoid Rule for integration  (offline 3)
            Simpson's 1/3 Rule for integration  (offline 3)
+           
+   #### 5. Regression
+           Linear Regression  
+           Non-Linear Regression  
+           Exponential Regression
+           Hybrid Regression ( Online 3)
