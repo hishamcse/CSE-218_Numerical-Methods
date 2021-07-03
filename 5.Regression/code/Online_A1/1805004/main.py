@@ -16,6 +16,6 @@ if __name__ == "__main__":
 
     draw_given_points(x_arr, y_arr)
 
-    calculation(np.copy(x_arr), np.copy(y_arr))                        # linear regression
+    calculation(np.copy(x_arr), np.copy(y_arr))
 
     show_graph()
