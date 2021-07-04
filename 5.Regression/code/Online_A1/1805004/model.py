@@ -1,9 +1,8 @@
-import math
 from Gauss_Elimination import *
 from Draw_graph import *
 
 
-def calculation(arr_X,arr_Y):
+def calculation(arr_X, arr_Y):
     sumX2 = sumYXE = sumYE = sumE = sumXE = 0.0
     for i in range(len(arr_X)):
         sumX2 += arr_X[i] * arr_X[i]
@@ -23,5 +22,4 @@ def calculation(arr_X,arr_Y):
 
     ans_arr = GaussianElimination(arr_A, arr_B)
     print(f"a:{ans_arr[0]} b:{ans_arr[1]}")
-    draw_curve(ans_arr,'red')
-
+    draw_curve(ans_arr, 'red')

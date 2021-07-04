@@ -21,7 +21,7 @@ def draw_curve(arr, color):
     Y = np.zeros(len(X))
     for i in range(len(X)):
         Y[i] = arr[0] * X[i] + arr[1] * math.exp(X[i])
-    plt.plot(X, Y, color, label=f"Hybrid Model Regression")
+    plt.plot(X, Y, color, label=f"{len(arr) - 1} Order Polynomial Regression")
 
 
 def show_graph():
