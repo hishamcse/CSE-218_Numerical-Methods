@@ -21,5 +21,5 @@ def calculation(arr_X, arr_Y):
     arr_B[1][0] = sumX2Y2 - sumY2
 
     ans_arr = GaussianElimination(arr_A, arr_B)
-    print(f"a:{ans_arr[0]} b:{ans_arr[1]}")
+    print(f"Kmax:{ans_arr[0]} Cs:{ans_arr[1]}")
     draw_curve(ans_arr, 'red')
