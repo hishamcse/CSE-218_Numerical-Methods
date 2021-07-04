@@ -1,5 +1,3 @@
-import math
-
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -17,10 +15,10 @@ def draw_given_points(array_X, array_Y):
 
 
 def draw_curve(arr, color):
-    X = np.linspace(0, 2, 50)
+    X = np.linspace(0, 4, 50)
     Y = np.zeros(len(X))
     for i in range(len(X)):
-        Y[i] = arr[0] * X[i] + arr[1] * math.exp(X[i])
+        Y[i] = (arr[0] * (X[i] ** 2)) / (arr[1] + (X[i] ** 2))
     plt.plot(X, Y, color, label=f"Hybrid Regression")
 
 
