@@ -23,3 +23,9 @@
            Non-Linear Regression  
            Exponential Regression
            Hybrid Regression ( Online 3)
+           
+   #### 6. Regression
+           Forward Difference Approximation 
+           Backward Difference Approximation 
+           Central Difference Approximation 
+           Higher Order Differentiation
