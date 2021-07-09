@@ -24,7 +24,7 @@
            Exponential Regression
            Hybrid Regression ( Online 3)
            
-   #### 6. Regression
+   #### 6. Differentiation
            Forward Difference Approximation 
            Backward Difference Approximation 
            Central Difference Approximation 
